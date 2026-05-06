@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DarkModeProvider } from "./context/DarkModeContext";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoutes from "./features/authentication/ProtectedRoutes";
 import Dashboard from "./pages/Dashboard";
@@ -10,9 +10,6 @@ import NotFound from "./pages/NotFound";
 import AppLayout from "./ui/AppLayout";
 import Account from "./pages/Account";
 import Tours from "./pages/Tours";
-
-import { useEffect, useState } from "react";
-import Spinner from "./ui/Spinner";
 import BookingDetails from "./features/bookings/BookingDetails";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
@@ -20,14 +17,6 @@ import Settings from "./pages/Settings";
 const queryClient = new QueryClient();
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
-  }, []);
-
-  if (isLoading) return <Spinner />;
-
   return (
     <DarkModeProvider>
       <Toaster
