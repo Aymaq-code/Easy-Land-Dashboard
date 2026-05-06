@@ -28,10 +28,12 @@ This project includes authentication, bookings management, tours system, analyti
 ---
 
 ✨ Features
+
 🔐 Authentication
 Login system
 Protected routes
 Local storage session handling
+
 📊 Dashboard
 Analytics overview
 Charts using Recharts
@@ -40,18 +42,22 @@ Real-time UI updates with React Query
 Create / update / delete tours
 Image upload support
 Pricing & discount system
+
 📅 Bookings System
 Booking list management
 Client details & filtering
 Pagination support
+
 🌙 UI Features
 Dark/Light mode (Context API)
 Responsive design
 Reusable UI components
+
 🧠 State Management
 React Context API (Dark Mode, Auth state)
 React Query for server state
 LocalStorage persistence
+
 🎨 UI System
 
 Built with a custom component system:
