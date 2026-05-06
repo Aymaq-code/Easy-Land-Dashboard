@@ -69,7 +69,7 @@ const PassEys = styled.img`
 `;
 
 function LoginForm() {
-  const [seePass, setSeePass] = useState("/");
+  const [seePass, setSeePass] = useState(false);
 
   function handleSeePass() {
     setSeePass((prv) => !prv);
