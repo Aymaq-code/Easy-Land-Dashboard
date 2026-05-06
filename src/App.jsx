@@ -10,21 +10,34 @@ import NotFound from "./pages/NotFound";
 import AppLayout from "./ui/AppLayout";
 import Account from "./pages/Account";
 import Tours from "./pages/Tours";
+
+import { useEffect, useState } from "react";
+import Spinner from "./ui/Spinner";
 import BookingDetails from "./features/bookings/BookingDetails";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 0,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 500);
+  }, []);
+
+  if (isLoading) return <Spinner />;
+
   return (
     <DarkModeProvider>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            fontSize: "14px",
+          },
+        }}
+      />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
@@ -48,15 +61,6 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            style: {
-              fontSize: "14px",
-            },
-          }}
-        />
       </QueryClientProvider>
     </DarkModeProvider>
   );
