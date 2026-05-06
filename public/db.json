@@ -95,24 +95,6 @@
       "discount": "50",
       "country": "https://flagcdn.com/af.svg",
       "id": "IQeBWMqNUnE"
-    },
-    {
-      "title": "Kabul City Tour (Copy)",
-      "image": "https://i.ibb.co/XZ3CVzJz/Masjid.jpg",
-      "capacity": "4",
-      "price": 120,
-      "discount": "50",
-      "country": "https://flagcdn.com/af.svg",
-      "id": "WqbPUKwnp7w"
-    },
-    {
-      "title": "Kabul City Tour (Copy)",
-      "image": "https://i.ibb.co/XZ3CVzJz/Masjid.jpg",
-      "capacity": "4",
-      "price": 120,
-      "discount": "50",
-      "country": "https://flagcdn.com/af.svg",
-      "id": "8Dq5duenIbQ"
     }
   ],
   "bookings": [
@@ -878,7 +860,7 @@
       "id": "3",
       "fullName": "Shabnam Arya",
       "email": "arya@gmail.com",
-      "password": "8888",
+      "password": "9999",
       "photo": "https://res.cloudinary.com/dduywz8ut/image/upload/v1777980829/dhc2jub6a4p2flfzpfwr.avif"
     }
   ],

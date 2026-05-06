@@ -1,16 +1,84 @@
-# React + Vite
+# 📊 SaaS Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **SaaS Dashboard application** built with **React, Vite, and Styled Components**.  
+This project includes authentication, bookings management, tours system, analytics dashboard, and reusable UI components.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+> (https://easy-land-dashboard.vercel.app/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧰 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ⚛️ React 19
+- ⚡ Vite
+- 🎨 Styled Components
+- 🔄 React Query (@tanstack/react-query)
+- 📊 Recharts (Data Visualization)
+- 🧭 React Router v7
+- 📝 React Hook Form
+- 🔔 React Hot Toast
+- 🎯 React Icons
+- 📅 date-fns
+- 🔑 UUID
+
+---
+
+✨ Features
+🔐 Authentication
+Login system
+Protected routes
+Local storage session handling
+📊 Dashboard
+Analytics overview
+Charts using Recharts
+Real-time UI updates with React Query
+🧳 Tours Management
+Create / update / delete tours
+Image upload support
+Pricing & discount system
+📅 Bookings System
+Booking list management
+Client details & filtering
+Pagination support
+🌙 UI Features
+Dark/Light mode (Context API)
+Responsive design
+Reusable UI components
+🧠 State Management
+React Context API (Dark Mode, Auth state)
+React Query for server state
+LocalStorage persistence
+🎨 UI System
+
+Built with a custom component system:
+
+Buttons
+Forms
+Inputs
+Modals
+Layout components
+
+Styled using styled-components.
+
+📷 Screenshots
+
+### 🏠 Dashboard
+
+![Dashboard](./src//assets//images/Dashboard.png)
+
+### 📦 Bookings Page
+
+![Tours](./src//assets//images/ToursList.png)
+
+### 📦 Settings Page
+
+![Settings](./src//assets//images/ToursList.png)
+
+👨‍💻 Author
+
+Abdul Rashid Aymaq
+Frontend Developer
