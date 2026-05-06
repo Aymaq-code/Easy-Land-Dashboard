@@ -76,7 +76,7 @@ Styled using styled-components.
 
 ### 📦 Settings Page
 
-![Settings](./src//assets//images/ToursList.png)
+![Settings](./src//assets//images/Settings.png)
 
 👨‍💻 Author
 
