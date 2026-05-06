@@ -41,7 +41,7 @@
       "title": "Istanbul",
       "capacity": 7,
       "price": 1300,
-      "discount": 17,
+      "discount": "18",
       "image": "https://res.cloudinary.com/dduywz8ut/image/upload/v1777274034/z1sb4kjzve5imc4tnu4p.jpg",
       "country": "https://flagcdn.com/tr.svg"
     },

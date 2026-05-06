@@ -13,7 +13,6 @@ import Tours from "./pages/Tours";
 import BookingDetails from "./features/bookings/BookingDetails";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
-import Spinner from "./ui/Spinner";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,43 +22,39 @@ const queryClient = new QueryClient({
   },
 });
 
-const isLoading = false;
-
 function App() {
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <BrowserRouter>
-            <Routes>
-              <Route element={<ProtectedRoutes />}>
-                <Route element={<AppLayout />}>
-                  <Route path="/" element={<Navigate to="/home" replace />} />
-                  <Route path="/home" element={<Dashboard />} />
-                  <Route path="/bookings" element={<Bookings />} />
-                  <Route path="/tours" element={<Tours />} />
-                  <Route path="/account" element={<Account />} />
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route
-                    path="/bookingDetails/:id"
-                    element={<BookingDetails />}
-                  />
-                </Route>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<AppLayout />}>
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path="/home" element={<Dashboard />} />
+                <Route path="/bookings" element={<Bookings />} />
+                <Route path="/tours" element={<Tours />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route
+                  path="/bookingDetails/:id"
+                  element={<BookingDetails />}
+                />
               </Route>
+            </Route>
 
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        )}
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
 
         <Toaster
           position="top-center"
           toastOptions={{
-            style: { fontSize: "14px" },
+            style: {
+              fontSize: "14px",
+            },
           }}
         />
       </QueryClientProvider>
