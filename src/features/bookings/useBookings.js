@@ -1,14 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 
-export function useBookings() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["bookings"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:3000/bookings");
-      if (!res.ok) throw new Error("Failed to fetch bookings");
-      return res.json();
-    },
-  });
+async function getBookings() {
+  const res = await fetch("https://69fc7b9cfce564e25918225f.mockapi.io/data");
 
-  return { data, isLoading, error };
+  if (!res.ok) throw new Error("Failed to fetch bookings");
+
+  const data = await res.json();
+
+  return data?.[0]?.bookings || [];
+}
+
+export function useBookings() {
+  return useQuery({
+    queryKey: ["bookings"],
+    queryFn: getBookings,
+  });
 }
