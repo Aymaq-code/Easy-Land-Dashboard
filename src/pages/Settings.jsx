@@ -81,7 +81,7 @@ function Settings() {
         <Heading as="h2">Settings</Heading>
         <p>Update and manage user data</p>
       </Header>
-      <Row type="horizontal" resp="lg">
+      <Row type="horizontal" resp="lg" rowRev="lg">
         {useLength && (
           <>
             <UsersList setSelectedUser={setSelectedUser} />

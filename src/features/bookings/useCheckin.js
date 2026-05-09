@@ -6,13 +6,16 @@ export function useCheckin() {
 
   return useMutation({
     mutationFn: async ({ id, changeStatus }) => {
-      const res = await fetch(`http://localhost:3000/bookings/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `https://69fedbea8c70b15fa3caca22.mockapi.io/bookings/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(changeStatus),
         },
-        body: JSON.stringify(changeStatus),
-      });
+      );
 
       if (!res.ok) throw new Error("Failed to update checkin");
       return res.json();
@@ -23,8 +26,8 @@ export function useCheckin() {
 
       toast.success(
         status === "checked-in"
-          ? "Checked-in successfully ✅"
-          : "Checked-out successfully 👋",
+          ? "Checked-in successfully!"
+          : "Checked-out successfully!",
       );
 
       queryClient.invalidateQueries({ queryKey: ["bookings"] });

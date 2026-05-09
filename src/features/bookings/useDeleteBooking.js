@@ -6,9 +6,12 @@ export function useDeleteBooking() {
 
   return useMutation({
     mutationFn: async (id) => {
-      const res = await fetch(`http://localhost:3000/bookings/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://69fedbea8c70b15fa3caca22.mockapi.io/bookings/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       if (!res.ok) throw new Error(`Failed to delete booking ${id}`);
       return id;

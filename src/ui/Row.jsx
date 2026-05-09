@@ -34,6 +34,14 @@ const Row = styled.div`
       }
     `}
 
+       ${(props) =>
+    props.rowRev === "lg" &&
+    css`
+      @media screen and (max-width: 1100px) {
+        flex-direction: column-reverse;
+      }
+    `}
+
   ${(props) =>
     props.resp === "sm" &&
     css`
