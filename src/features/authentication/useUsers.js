@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 async function getUsers() {
-  const res = await fetch("https://69fc7b9cfce564e25918225f.mockapi.io/data");
+  const res = await fetch("https://69fc7b9cfce564e25918225f.mockapi.io/users");
 
   if (!res.ok) throw new Error("Failed to fetch users");
 
-  const data = await res.json();
-
-  return data?.[0]?.users || [];
+  return await res.json();
 }
 
 export function useUsers() {

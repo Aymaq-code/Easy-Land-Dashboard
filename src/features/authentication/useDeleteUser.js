@@ -6,9 +6,12 @@ export function useDeleteUser() {
 
   return useMutation({
     mutationFn: async (id) => {
-      const res = await fetch(`http://localhost:3000/users/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://69fc7b9cfce564e25918225f.mockapi.io/users/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       if (!res.ok) throw new Error(`Failed to delete tour ${id}`);
       return id;

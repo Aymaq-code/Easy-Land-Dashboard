@@ -5,7 +5,6 @@ import { PageInput } from "../ui/Input";
 import Label from "../ui/Label";
 import Button from "../ui/Button";
 import Row from "../ui/Row";
-import { v4 as uuidv4 } from "uuid";
 
 import {
   FaUser,
@@ -92,8 +91,6 @@ function Users() {
   const [isUploading, setIsUploading] = useState(false);
   const [resetKey, setResetKey] = useState(0);
 
-  const newId = uuidv4();
-
   const {
     register,
     reset,
@@ -104,7 +101,6 @@ function Users() {
 
   function handleCreateUser(data) {
     const newUser = {
-      id: newId,
       fullName: data.fullName,
       email: data.email,
       password: data.password,
