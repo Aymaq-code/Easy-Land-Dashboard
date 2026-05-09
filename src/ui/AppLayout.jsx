@@ -10,15 +10,18 @@ const StyledAppLayout = styled.div`
   left: 0;
   top: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const Main = styled.main`
   display: grid;
   grid-template-columns: 260px 1fr;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
   background-color: var(--color-grey-0);
 
   @media screen and (max-width: 768px) {
@@ -28,7 +31,6 @@ const Main = styled.main`
 `;
 
 const Container = styled.div`
-  overflow-x: auto;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -37,6 +39,9 @@ const Container = styled.div`
   background-color: var(--color-grey-100);
   padding: 24px;
   min-height: calc(100vh - 70px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
 
   @media screen and (max-width: 1200px) {
     padding: 20px;
