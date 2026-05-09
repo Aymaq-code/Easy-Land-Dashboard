@@ -40,7 +40,7 @@ const AvatarImg = styled.img`
 `;
 
 const AvatarName = styled.p`
-  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  font-size: clamp(1.4rem, 2.5vw, 1.4rem);
   font-weight: 500;
   color: var(--color-grey-700);
   margin: 0;

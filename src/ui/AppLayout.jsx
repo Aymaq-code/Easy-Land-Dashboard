@@ -39,20 +39,18 @@ const Container = styled.div`
   background-color: var(--color-grey-100);
   padding: 24px;
   min-height: calc(100vh - 70px);
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100%;
 
   @media screen and (max-width: 1200px) {
     padding: 20px;
   }
 
   @media screen and (max-width: 768px) {
-    padding: 16px;
-  }
-
-  @media screen and (max-width: 480px) {
-    padding: 12px;
+    min-height: calc(100vh - 110px);
+    height: 100%;
+    padding: 0 0 15px 0;
   }
 `;
 
