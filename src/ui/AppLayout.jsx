@@ -6,6 +6,10 @@ import AppHeader from "./AppHeader";
 import { useState, useEffect } from "react";
 
 const StyledAppLayout = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
