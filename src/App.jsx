@@ -1,18 +1,27 @@
+// Libraries
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { DarkModeProvider } from "./context/DarkModeContext";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import ProtectedRoutes from "./features/authentication/ProtectedRoutes";
+
+// Context
+import { DarkModeProvider } from "./context/DarkModeContext";
+
+// Layout
+import AppLayout from "./ui/AppLayout";
+
+// Pages
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import AppLayout from "./ui/AppLayout";
-import Account from "./pages/Account";
 import Tours from "./pages/Tours";
-import BookingDetails from "./features/bookings/BookingDetails";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
+import Accounts from "./pages/Accounts";
+
+// Features
+import ProtectedRoutes from "./features/authentication/ProtectedRoutes";
+import BookingDetails from "./features/bookings/BookingDetails";
 
 const queryClient = new QueryClient();
 
@@ -36,7 +45,7 @@ function App() {
                 <Route path="/home" element={<Dashboard />} />
                 <Route path="/bookings" element={<Bookings />} />
                 <Route path="/tours" element={<Tours />} />
-                <Route path="/account" element={<Account />} />
+                <Route path="/accounts" element={<Accounts />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route

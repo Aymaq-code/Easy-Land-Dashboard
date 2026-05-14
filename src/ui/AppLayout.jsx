@@ -1,9 +1,9 @@
-// AppLayout.jsx
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router";
 import styled from "styled-components";
+
 import Sidebar from "./Sidebar";
 import AppHeader from "./AppHeader";
-import { useState, useEffect } from "react";
 
 const StyledAppLayout = styled.div`
   position: fixed;
@@ -48,9 +48,9 @@ const Container = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 120px);
     height: 100%;
-    padding: 0 0 15px 0;
+    padding: 0;
   }
 `;
 
@@ -86,7 +86,6 @@ function AppLayout() {
   const toggleSidebar = () => setShowSidebar((prev) => !prev);
   const closeSidebar = () => setShowSidebar(false);
 
-  // Close sidebar when screen size changes to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {

@@ -1,45 +1,43 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { userApi } from "../../services/apiUsers";
 
 export function useDeleteUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (id) => {
-      const res = await fetch(
-        `https://69fc7b9cfce564e25918225f.mockapi.io/users/${id}`,
-        {
-          method: "DELETE",
-        },
-      );
-
-      if (!res.ok) throw new Error(`Failed to delete tour ${id}`);
-      return id;
-    },
+    mutationFn: userApi.delete,
 
     onMutate: async (id) => {
-      await queryClient.cancelQueries(["users"]);
+      // Cancel any outgoing refetches
+      await queryClient.cancelQueries({ queryKey: ["users"] });
 
+      // Snapshot the previous data
       const previousData = queryClient.getQueryData(["users"]);
 
+      // Optimistically update to remove the tour
       queryClient.setQueryData(["users"], (old) =>
-        old.filter((item) => item.id !== id),
+        old?.filter((item) => item.id !== id),
       );
 
       return { previousData };
     },
 
     onSuccess: () => {
-      toast.success("User deleted successfuly!");
-      queryClient.invalidateQueries(["tours"]);
+      toast.success("User deleted successfully!");
     },
 
-    onError: (context) => {
-      toast.error("Failed to delete user!");
-      queryClient.setQueryData(["tours"], context.previousData);
+    onError: (error, id, context) => {
+      toast.error(error.message || "Failed to delete user");
+      // Rollback on error
+      if (context?.previousData) {
+        queryClient.setQueryData(["tours"], context.previousData);
+      }
     },
+
     onSettled: () => {
-      queryClient.invalidateQueries(["users"]);
+      // Always refetch after error or success to ensure consistency
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 }

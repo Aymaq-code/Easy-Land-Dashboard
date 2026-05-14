@@ -6,8 +6,14 @@ const Mini = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 20px 0;
 
+  & span {
+    font-size: 1.3rem;
+  }
+`;
 const Container = styled.div`
   width: 50px;
   aspect-ratio: 4;
@@ -41,10 +47,12 @@ const Container = styled.div`
     }
   }
 `;
-function MiniSpinner() {
+
+function MiniSpinner({ text }) {
   return (
     <Mini>
-      <Container></Container>
+      <Container />
+      <span>{text}</span>
     </Mini>
   );
 }

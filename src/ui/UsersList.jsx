@@ -9,6 +9,8 @@ import Spinner from "./Spinner";
 import MiniSpinner from "./MiniSpinner";
 import ErrorComponent from "./ErrorComponent";
 import InputErrorMsg from "./ErrorMsgText";
+import { useState } from "react";
+import ConfirmDelete from "./ConfirmDelete";
 
 const UserListLayout = styled.section`
   border-radius: 2rem;
@@ -132,6 +134,7 @@ const InfoRow = styled.div`
   align-items: center;
   gap: 1rem;
   font-size: 1.4rem;
+
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--color-grey-100);
 
@@ -176,8 +179,17 @@ const Badge = styled.div`
 `;
 
 function UsersList({ setSelectedUser }) {
+  const [userToDelete, setUserToDelete] = useState(null);
   const { data, isLoading, error } = useUsers();
-  const { mutate: delteUser } = useDeleteUser();
+  const { mutate: deleteUser } = useDeleteUser();
+
+  function handleConfirmDelete() {
+    if (!userToDelete) return;
+
+    deleteUser(userToDelete.id);
+
+    setUserToDelete(null);
+  }
 
   if (isLoading) return <MiniSpinner />;
   if (error) return <ErrorComponent />;
@@ -209,7 +221,11 @@ function UsersList({ setSelectedUser }) {
                 <InfoRow>
                   <FaUser />
                   <span className="label">Name:</span>
-                  <span className="value">{user.fullName || user.name}</span>
+                  <span
+                    className="value"
+                    style={{ textTransform: "capitalize" }}>
+                    {user.fullName || user.name}
+                  </span>
                 </InfoRow>
 
                 <InfoRow>
@@ -230,9 +246,10 @@ function UsersList({ setSelectedUser }) {
                   <Button
                     size="small"
                     variation="danger"
-                    onClick={() => delteUser(user.id)}>
+                    onClick={() => setUserToDelete(user)}>
                     🗑️ Delete
                   </Button>
+
                   <Button
                     size="small"
                     variation="outline"
@@ -245,6 +262,13 @@ function UsersList({ setSelectedUser }) {
           ))}
         </UsersGrid>
       </Container>
+      {userToDelete && (
+        <ConfirmDelete
+          resourceName={userToDelete.fullName || userToDelete.name}
+          onConfirm={handleConfirmDelete}
+          onClose={() => setUserToDelete(null)}
+        />
+      )}
     </UserListLayout>
   );
 }

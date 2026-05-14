@@ -1,12 +1,15 @@
-import { useDashboardFilter } from "../../hooks/useDashboardFilter";
 import styled from "styled-components";
+
+import { useDashboardFilter } from "../../hooks/useDashboardFilter";
+
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
+import Filter from "../../ui/Filter";
+
 import Stats from "./Stats";
 import Today from "./Today";
 import StayDurationSummary from "./StayDurationSummary";
 import SalesOverview from "./SalesOverview";
-import Filter from "../../ui/Filter";
 
 const StyledDashboardLayout = styled.div`
   padding: 20px;

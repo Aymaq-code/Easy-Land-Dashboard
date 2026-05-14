@@ -1,23 +1,29 @@
+import { useState } from "react";
 import styled from "styled-components";
+
 import { useTours } from "../features/Tours/useTours";
 import { useBookings } from "../features/bookings/useBookings";
-import StyledImage from "./DataImg";
+import { useDeleteTour } from "../features/Tours/useDeleteTour";
+import { useDeleteBooking } from "../features/bookings/useDeleteBooking";
+import { useFilterAndSort } from "../hooks/useFilterAndSort";
+
 import {
   BookingContainer,
   BookingsDataList,
   Container,
   ToursDataList,
 } from "./DataList";
+
+import StyledImage from "./DataImg";
 import Heading from "./Heading";
-import { formatCurrency, formatDate } from "../utils/helpers";
 import KebabMenu from "./KebabMenu";
-import { useState } from "react";
 import StatusTag from "./StatusTag";
-import { useDeleteTour } from "../features/Tours/useDeleteTour";
 import Pagination from "./Pagination";
-import { useDeleteBooking } from "../features/bookings/useDeleteBooking";
-import { useFilterAndSort } from "../hooks/useFilterAndSort";
+import ConfirmDelete from "./ConfirmDelete";
+
 import DataTitlesRes from "../ui/DataTitlesRes";
+
+import { formatCurrency, formatDate } from "../utils/helpers";
 
 const ContentsLayout = styled.div`
   padding: 5px;
@@ -75,6 +81,8 @@ const EmptyState = styled.div`
 `;
 
 function PageContents({ type, onEditTour }) {
+  const [tourToDelete, setTourToDelete] = useState(null);
+  const [bookingToDelete, setBookingToDelete] = useState(null);
   const [openMenuId, setOpenMenuId] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -99,6 +107,22 @@ function PageContents({ type, onEditTour }) {
 
   function handlePageChange({ selected }) {
     setCurrentPage(selected);
+  }
+
+  function handleConfirmDeleteTour() {
+    if (!tourToDelete) return;
+
+    deleteTour(tourToDelete.id);
+
+    setTourToDelete(null);
+  }
+
+  function handleConfirmDeleteBooking() {
+    if (!bookingToDelete) return;
+
+    deleteBooking(bookingToDelete.id);
+
+    setBookingToDelete(null);
   }
 
   return (
@@ -134,11 +158,19 @@ function PageContents({ type, onEditTour }) {
                   id={tour.id}
                   openMenuId={openMenuId}
                   setOpenMenuId={setOpenMenuId}
-                  deleteTour={() => deleteTour(tour.id)}
+                  deleteTour={() => setTourToDelete(tour)}
                   tourData={tour}
                   onEditTour={onEditTour}
                 />
               </ToursDataList>
+
+              {tourToDelete && (
+                <ConfirmDelete
+                  resourceName={tourToDelete.title}
+                  onConfirm={handleConfirmDeleteTour}
+                  onClose={() => setTourToDelete(null)}
+                />
+              )}
             </Container>
           ))}
 
@@ -169,12 +201,20 @@ function PageContents({ type, onEditTour }) {
 
                 <KebabMenu
                   type="bookings"
+                  status={booking.status}
                   id={booking.id}
                   openMenuId={openMenuId}
                   setOpenMenuId={setOpenMenuId}
-                  deleteBooking={() => deleteBooking(booking.id)}
+                  deleteBooking={() => setBookingToDelete(booking)}
                 />
               </BookingsDataList>
+              {bookingToDelete && (
+                <ConfirmDelete
+                  resourceName={bookingToDelete.clientName}
+                  onConfirm={handleConfirmDeleteBooking}
+                  onClose={() => setBookingToDelete(null)}
+                />
+              )}
             </BookingContainer>
           ))}
 

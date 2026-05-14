@@ -9,15 +9,23 @@ const Container = styled.div`
   min-width: 150px;
   max-width: 280px;
   width: auto;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--color-grey-100);
+  }
 
   @media (max-width: 768px) {
     gap: 0.8rem;
     min-width: 120px;
+    padding: 0.2rem 0.6rem;
   }
 
-  @media (max-width: 480px) {
-    gap: 0.6rem;
-    min-width: 100px;
+  @media (max-width: 640px) {
+    min-width: auto;
+    gap: 0.5rem;
   }
 `;
 
@@ -27,20 +35,21 @@ const AvatarImg = styled.img`
   height: 40px;
   object-fit: cover;
   flex-shrink: 0;
+  border: 2px solid var(--color-brand-100);
 
   @media (max-width: 768px) {
     width: 35px;
     height: 35px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     width: 32px;
     height: 32px;
   }
 `;
 
 const AvatarName = styled.p`
-  font-size: clamp(1.4rem, 2.5vw, 1.4rem);
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--color-grey-700);
   margin: 0;
@@ -50,9 +59,15 @@ const AvatarName = styled.p`
   flex: 1;
   min-width: 0;
 
-  @media (max-width: 768px) {
-    font-weight: 500;
+  @media (max-width: 640px) {
+    display: none;
   }
+`;
+
+const GuestName = styled.span`
+  font-size: 1.3rem;
+  color: var(--color-grey-500);
+  font-style: italic;
 `;
 
 function Avatar() {

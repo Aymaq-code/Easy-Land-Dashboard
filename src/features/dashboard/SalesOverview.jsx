@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { useBookings } from "../bookings/useBookings";
-import MiniSpinner from "../../ui/MiniSpinner";
-import Heading from "../../ui/Heading";
+
 import {
   AreaChart,
   Area,
@@ -11,8 +9,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { formatDate } from "../../utils/helpers";
+
+import { useBookings } from "../bookings/useBookings";
+
+import Heading from "../../ui/Heading";
+import MiniSpinner from "../../ui/MiniSpinner";
+import ErrorComponent from "../../ui/ErrorComponent";
 import NoThingFound from "../../ui/NoThingFound";
+
+import { formatDate } from "../../utils/helpers";
+import { demoBookings } from "../../data/demoBookings";
 
 const Layout = styled.div`
   width: 100%;
@@ -27,11 +33,14 @@ const Layout = styled.div`
 function SalesOverview({ dateRange }) {
   const { data: bookings = [], isLoading, error } = useBookings();
 
+  // Use API data if available otherwise demo data
+  const activeBookings = bookings.length > 0 ? bookings : demoBookings;
+
   if (isLoading) return <MiniSpinner />;
   if (error) return <ErrorComponent />;
 
   // Filter bookings by date range
-  const filteredBookings = bookings.filter((booking) => {
+  const filteredBookings = activeBookings.filter((booking) => {
     const bookingDate = new Date(booking.startDate);
     const startDate = new Date(dateRange.startDate);
     const endDate = new Date(dateRange.endDate);

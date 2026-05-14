@@ -84,7 +84,7 @@ function UploadPhoto({ errors, setValue, isUploading, setIsUploading, reset }) {
           type="file"
           id="photo"
           accept="image/*"
-          disabled={isUploading}
+          disabled={!isUploading}
           onChange={handleFileChange}
         />
 

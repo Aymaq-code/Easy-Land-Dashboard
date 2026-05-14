@@ -1,6 +1,6 @@
-// useDuplicateTour.js
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { tourApi } from "../../services/apiTours";
 
 export function useDuplicateTour() {
   const queryClient = useQueryClient();
@@ -10,37 +10,20 @@ export function useDuplicateTour() {
       // Create a duplicate tour without the id
       const { id, ...duplicateTour } = tour;
 
-      // Add "Copy" to the title and generate new id
+      // Add "Copy" to the title
       const newTour = {
         ...duplicateTour,
-        id: Date.now(), // Generate new unique id
         title: `${tour.title} (Copy)`,
       };
 
-      console.log("Duplicating tour:", newTour); // Debug log
+      console.log("Duplicating tour:", newTour);
 
-      const res = await fetch(`http://localhost:3000/tours`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTour),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.text();
-        console.error("API Error:", errorData);
-        throw new Error(`Failed to duplicate tour: ${res.status}`);
-      }
-
-      const data = await res.json();
-      console.log("Duplicate response:", data); // Debug log
-      return data;
+      // Use the create method from tourApi
+      return await tourApi.create(newTour);
     },
 
     onSuccess: () => {
       toast.success("Tour duplicated successfully!");
-      // Invalidate and refetch tours
       queryClient.invalidateQueries({ queryKey: ["tours"] });
     },
 

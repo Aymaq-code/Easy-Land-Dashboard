@@ -7,6 +7,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import SimpleToursComponent from "../../ui/ToursListEnhanced";
 import ErrorComponent from "../../ui/ErrorComponent";
 import NoThingFound from "../../ui/NoThingFound";
+import { demoBookings } from "../../data/demoBookings";
 
 const SummaryLayout = styled.div`
   width: 50%;
@@ -70,14 +71,20 @@ const COLORS = ["#f97316", "#eab308", "#84cc16"];
 function StayDurationSummary({ dateRange }) {
   const { data: bookings = [], isLoading, error } = useBookings();
 
+  // Use API data if available otherwise demo data
+  const activeBookings = bookings.length > 0 ? bookings : demoBookings;
+
   if (isLoading) return <MiniSpinner />;
   if (error) return <ErrorComponent />;
 
   // Filter bookings by date range
-  const filteredBookings = bookings.filter((booking) => {
-    const bookingDate = new Date(booking.startDate);
-    const startDate = new Date(dateRange.startDate);
-    const endDate = new Date(dateRange.endDate);
+  const filteredBookings = activeBookings.filter((booking) => {
+    const bookingDate = new Date(booking.startDate).setHours(0, 0, 0, 0);
+
+    const startDate = new Date(dateRange.startDate).setHours(0, 0, 0, 0);
+
+    const endDate = new Date(dateRange.endDate).setHours(23, 59, 59, 999);
+
     return bookingDate >= startDate && bookingDate <= endDate;
   });
 

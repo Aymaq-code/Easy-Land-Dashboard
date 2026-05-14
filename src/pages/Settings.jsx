@@ -1,101 +1,81 @@
-import { useState } from "react";
 import styled from "styled-components";
-import UserUpdateForm from "../features/authentication/UserUpdateForm";
-import UsersList from "../ui/UsersList";
+import { getCurrentUser } from "../features/authentication/useAuth";
+import UserAccountForm from "../features/authentication/UserAccountForm";
 import Heading from "../ui/Heading";
-import UserNotSelected from "../ui/UserNotSelected";
-import Row from "../ui/Row";
-import { useUsers } from "../features/authentication/useUsers";
-import NoUser from "../ui/NoUser";
-import Spinner from "../ui/Spinner";
 
-const SettingsLayout = styled.main`
-  width: 100%;
-  max-width: 130rem;
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-200);
-  border-radius: 7px;
+const AccountContainer = styled.div`
+  max-width: 80rem;
   margin: 0 auto;
-  height: 100%;
-  padding: 3rem;
+  padding: 2rem;
 
-  @media screen and (max-width: 1200px) {
-    padding: 3rem;
-  }
-
-  @media screen and (max-width: 1100px) {
-    padding: 3rem;
-    height: auto;
-  }
-
-  @media screen and (max-width: 768px) {
-    padding: 2.5rem 2rem;
-    border-radius: 0;
-    height: auto;
-  }
-
-  @media screen and (max-width: 507px) {
-    padding: 2rem 0.5rem;
+  @media (max-width: 768px) {
+    padding: 1rem;
   }
 `;
 
-const Container = styled.div`
-  border: 2px solid red;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-`;
-
-const Header = styled.div`
-  width: 100%;
+const ProfileHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--color-grey-0);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
 
-  margin-bottom: 2rem;
-  padding: 0 16rem 0 0;
-
-  p {
-    color: var(--color-grey-500);
-    font-size: 1.4rem;
-  }
-
-  @media screen and (max-width: 1100px) {
+  @media (max-width: 640px) {
     flex-direction: column;
-    align-items: start;
-    padding: 0;
+    text-align: center;
   }
+`;
+
+const Avatar = styled.div`
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-500),
+    var(--color-brand-700)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+`;
+
+const UserInfo = styled.div`
+  flex: 1;
 `;
 
 function Settings() {
-  const { data, isLoading } = useUsers();
-  const useLength = data?.length;
-  const [selectedUser, setSelectedUser] = useState(null);
+  const user = getCurrentUser();
 
-  if (isLoading) return <Spinner />;
-  if (!useLength) return <NoUser />;
+  if (!user) {
+    return (
+      <AccountContainer>
+        <Heading as="h2">Account Settings</Heading>
+        <p>Please log in to view your account.</p>
+      </AccountContainer>
+    );
+  }
 
   return (
-    <SettingsLayout>
-      <Header>
-        <Heading as="h2">Settings</Heading>
-        <p>Update and manage user data</p>
-      </Header>
-      <Row type="horizontal" resp="lg" rowRev="lg">
-        {useLength && (
-          <>
-            <UsersList setSelectedUser={setSelectedUser} />
+    <AccountContainer>
+      <ProfileHeader>
+        <Avatar>{user.fullName?.charAt(0) || user.email?.charAt(0)}</Avatar>
+        <UserInfo>
+          <Heading as="h2">Welcome back, {user.fullName || "User"}!</Heading>
+          <p style={{ color: "var(--color-grey-500)", marginTop: "0.5rem" }}>
+            Manage your profile information and preferences
+          </p>
+        </UserInfo>
+      </ProfileHeader>
 
-            {selectedUser && (
-              <UserUpdateForm
-                user={selectedUser}
-                setSelectedUser={setSelectedUser}
-              />
-            )}
-          </>
-        )}
-      </Row>
-    </SettingsLayout>
+      <UserAccountForm user={user} />
+    </AccountContainer>
   );
 }
 

@@ -32,13 +32,13 @@ const StatusTag = styled.span`
 
   background-color: ${(props) => {
     if (props.status === "checked-in") return "var(--color-green-100)";
-    if (props.status === "checked-out") return "var(--color-blue-100)";
+    if (props.status === "checked-out") return "var(--color-grey-400)";
     return "var( --color-yellow-100)";
   }};
 
   color: ${(props) => {
     if (props.status === "checked-in") return "var(--color-green-700)";
-    if (props.status === "checked-out") return "var(--color-blue-700)";
+    if (props.status === "checked-out") return "var(--color-grey-100)";
     return "var( --color-yellow-700)";
   }};
 `;

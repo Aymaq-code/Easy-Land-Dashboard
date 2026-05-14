@@ -1,19 +1,23 @@
-import { useToggle } from "../hooks/useToggle";
 import { useState } from "react";
-import { useTours } from "../features/Tours/useTours";
 import styled from "styled-components";
+
+import { useToggle } from "../hooks/useToggle";
+import { useTours } from "../features/Tours/useTours";
+
+import PageLayout from "../ui/PageLayout";
 import PageHead from "../ui/PageHead";
+import PageContents from "../ui/PageContents";
+
 import Row from "../ui/Row";
 import Heading from "../ui/Heading";
 import DataTitles from "../ui/DataTitles";
-
-import PageContents from "../ui/PageContents";
 import DataContainer from "../ui/DataContainer";
 import Button from "../ui/Button";
-import PageLayout from "../ui/PageLayout";
+
 import TourCreateFrom from "../features/Tours/TourCreateForm";
 import TourUpdateForm from "../features/Tours/TourUpdateForm";
 import SimpleToursComponent from "../ui/ToursListEnhanced";
+
 import Spinner from "../ui/Spinner";
 import ErrorComponent from "../ui/ErrorComponent";
 

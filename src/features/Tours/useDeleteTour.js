@@ -1,42 +1,43 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { tourApi } from "../../services/apiTours";
 
 export function useDeleteTour() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (id) => {
-      const res = await fetch(`http://localhost:3000/tours/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) throw new Error(`Failed to delete tour ${id}`);
-      return id;
-    },
+    mutationFn: tourApi.delete,
 
     onMutate: async (id) => {
-      await queryClient.cancelQueries(["tours"]);
+      // Cancel any outgoing refetches
+      await queryClient.cancelQueries({ queryKey: ["tours"] });
 
+      // Snapshot the previous data
       const previousData = queryClient.getQueryData(["tours"]);
 
+      // Optimistically update to remove the tour
       queryClient.setQueryData(["tours"], (old) =>
-        old.filter((item) => item.id !== id),
+        old?.filter((item) => item.id !== id),
       );
 
       return { previousData };
     },
 
     onSuccess: () => {
-      toast.success("Tour deleted successfuly");
-      queryClient.invalidateQueries(["tours"]);
+      toast.success("Tour deleted successfully!");
     },
 
-    onError: (context) => {
-      toast.error("Failed to delete tour");
-      queryClient.setQueryData(["tours"], context.previousData);
+    onError: (error, id, context) => {
+      toast.error(error.message || "Failed to delete tour");
+      // Rollback on error
+      if (context?.previousData) {
+        queryClient.setQueryData(["tours"], context.previousData);
+      }
     },
+
     onSettled: () => {
-      queryClient.invalidateQueries(["tours"]);
+      // Always refetch after error or success to ensure consistency
+      queryClient.invalidateQueries({ queryKey: ["tours"] });
     },
   });
 }

@@ -143,7 +143,9 @@ function BookingInfo({ booking, tour }) {
       ? Number(booking.breakfastCost) * booking.nights * booking.guests
       : 0;
 
-  const subtotal = breakfastCost + tour.price;
+  const subtotal = tour
+    ? breakfastCost + Number(tour.price || 0)
+    : breakfastCost;
 
   const navigate = useNavigate();
 
@@ -174,9 +176,7 @@ function BookingInfo({ booking, tour }) {
           </h4>
 
           <p>
-            <b>Client:</b>
-
-            {booking.clientName}
+            <b>Client:</b> {booking.clientName}
           </p>
           <p>
             <b>Guests:</b> {booking.guests} guest
@@ -185,47 +185,56 @@ function BookingInfo({ booking, tour }) {
             <b>Email:</b> {booking.email}
           </p>
           <p>
-            <b>National ID:</b> {booking.nationalId}
+            <b>National ID:</b> {booking.nationalId || "N/A"}
           </p>
         </Info>
         <Info>
           <h4>
-            <img src={tour.country} alt="country flag" width={24} height={16} />
+            {/* استفاده از optional chaining و fallback */}
+            <img
+              src={tour?.country || booking.country}
+              alt="country flag"
+              width={24}
+              height={16}
+            />
             TOUR DETAILS
           </h4>
           <p>
-            <b>Package:</b> {tour.title}
+            <b>Package:</b> {tour?.title || "Unknown Tour"}
           </p>
           <p>
             <b>Duration:</b> {booking.nights} nights
           </p>
           <p>
-            <b>Capacity:</b> {tour.capacity} capacity
+            <b>Capacity:</b> {tour?.capacity || "N/A"} capacity
           </p>
           <p>
-            <b>Breakfast:</b> {booking.breakfast ? "✅ Yes" : "❌  No"}{" "}
+            <b>Breakfast:</b> {booking.breakfast ? "✅ Yes" : "❌ No"}
           </p>
         </Info>
       </InfoContainer>
+
       <Observation>
         <h4>📝 OBSERVATIONS</h4>
-        <i>{booking.observations}</i>
+        <i>{booking.observations || "No observations"}</i>
       </Observation>
 
       <PaymentDisplay>
         <Row type="vertical">
           <p>
-            <span>Total price: {booking.nights} nights</span>
-            <span>{formatCurrency(tour.price)}</span>
+            <span>Price per night:</span>
+            <span>
+              {tour
+                ? formatCurrency(Number(tour.price || 0))
+                : formatCurrency(0)}
+            </span>
           </p>
           <p>
             <span>
               {booking.breakfast &&
-                `Breakfast (days ${booking.nights}x${booking.guests} guests):`}
+                `Breakfast (${booking.nights} nights x ${booking.guests} guests):`}
             </span>
-            <span>
-              <span>{booking.breakfast && formatCurrency(breakfastCost)}</span>
-            </span>
+            <span>{booking.breakfast && formatCurrency(breakfastCost)}</span>
           </p>
 
           <p>
@@ -257,22 +266,14 @@ function BookingInfo({ booking, tour }) {
             }}>
             <span>Status:</span>
             <span
-              style={
-                booking.isPaid
-                  ? {
-                      color: "#0b0b0b",
-                      backgroundColor: "#ecd13a",
-                      padding: "4px 20px",
-                      borderRadius: "50px",
-                    }
-                  : {
-                      color: "#464444",
-                      backgroundColor: "#ecd13a",
-                      padding: "4px 20px",
-                      borderRadius: "50px",
-                    }
-              }>
-              {booking.isPaid ? "PAID" : "UN-PAID"}
+              style={{
+                color: "#0b0b0b",
+                backgroundColor: booking.isPaid ? "#4CAF50" : "#f44336",
+                padding: "4px 20px",
+                borderRadius: "50px",
+                display: "inline-block",
+              }}>
+              {booking.isPaid ? "PAID" : "UNPAID"}
             </span>
           </p>
         </Row>

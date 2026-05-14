@@ -1,13 +1,16 @@
 import { useNavigate, useParams } from "react-router";
-import { useBookings } from "./useBookings";
 import styled, { css } from "styled-components";
+
+import { useBookings } from "./useBookings";
+import { useTours } from "../Tours/useTours";
+
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Button from "../../ui/Button";
 import StatusTag from "../../ui/StatusTag";
-import { useTours } from "../Tours/useTours";
-import { formatDate, formatDistanceFromNow } from "../../utils/helpers";
 import BookingInfo from "../../ui/BookingInfo";
+
+import { formatDate, formatDistanceFromNow } from "../../utils/helpers";
 
 const DetailsContainer = styled.div`
   width: 100%;
@@ -30,7 +33,7 @@ const DetailsContainer = styled.div`
 const Header = styled.div`
   background: linear-gradient(
     135deg,
-    var(--color-brand-600) 0%,
+    var(--color-grey-800) 0%,
     var(--color-brand-500) 100%
   );
   padding: 2.5rem;
@@ -91,15 +94,15 @@ const TourDetails = styled.div`
 function BookingDetails() {
   const { data: bookings, isLoading, error } = useBookings();
   const { data: tours } = useTours();
+
   const { id } = useParams();
 
   const navigate = useNavigate();
-
   if (isLoading) return <p>Loading data...</p>;
   if (error) return <p>Booking not found</p>;
 
   const booking = bookings?.find((b) => String(b.id) === id);
-  const tour = tours?.find((t) => String(t.id) === String(booking?.tourId));
+  const tour = tours?.find((t) => t.id === String(booking?.tourId));
 
   return (
     <DetailsContainer>
@@ -112,7 +115,7 @@ function BookingDetails() {
             </Row>
             <Row type="vertical">
               <Ptag>
-                {booking.nights} nights <b>{tour.title}</b>
+                {booking?.nights} nights <b>{tour?.title}</b>
               </Ptag>
 
               <Ptag size="sm">
@@ -133,7 +136,12 @@ function BookingDetails() {
         </Row>
       </Header>
 
-      <BookingInfo booking={booking} tour={tour} />
+      <BookingInfo
+        booking={booking}
+        tour={tour}
+        isLoading={isLoading}
+        error={error}
+      />
     </DetailsContainer>
   );
 }

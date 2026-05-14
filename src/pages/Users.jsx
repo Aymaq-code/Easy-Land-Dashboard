@@ -1,10 +1,6 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import Form from "../ui/Form";
-import FormGroup from "../ui/FormGroup";
-import { PageInput } from "../ui/Input";
-import Label from "../ui/Label";
-import Button from "../ui/Button";
-import Row from "../ui/Row";
 
 import {
   FaUser,
@@ -13,12 +9,18 @@ import {
   FaUserPlus,
   FaTimes,
 } from "react-icons/fa";
+
+import { useCreateUser } from "../features/authentication/useCreateUser";
+
+import Form from "../ui/Form";
+import FormGroup from "../ui/FormGroup";
+import { PageInput } from "../ui/Input";
+import Label from "../ui/Label";
+import Button from "../ui/Button";
+import Row from "../ui/Row";
 import Heading from "../ui/Heading";
 import UploadPhoto from "../ui/UploadPhoto";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
 import InputErrorMsg from "../ui/ErrorMsgText";
-import { useCreateUser } from "../features/authentication/useCreateUser";
 
 const UserLayout = styled.section`
   width: 100%;

@@ -1,14 +1,18 @@
 import { useBookings } from "../features/bookings/useBookings";
+
+import PageLayout from "../ui/PageLayout";
+import PageContents from "../ui/PageContents";
 import PageHead from "../ui/PageHead";
+
 import Row from "../ui/Row";
 import Heading from "../ui/Heading";
-import PageContents from "../ui/PageContents";
 import DataTitles from "../ui/DataTitles";
-import PageLayout from "../ui/PageLayout";
 import DataContainer from "../ui/DataContainer";
+
 import Button from "../ui/Button";
 import BookingUpdateForm from "../features/bookings/BookingDetails";
 import SimpleToursComponent from "../ui/ToursListEnhanced";
+
 import Spinner from "../ui/Spinner";
 import ErrorComponent from "../ui/ErrorComponent";
 

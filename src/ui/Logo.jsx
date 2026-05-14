@@ -1,28 +1,30 @@
+// src/ui/Logo.jsx
 import styled from "styled-components";
-import { useDarkMode } from "../context/DarkModeContext";
-import lightLogo from "../assets/images/logo-light.png";
-import darkLogo from "../assets/images/logoDark.png";
+import { HiHomeModern } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
-const LogoLayout = styled.div`
+const StyledLogo = styled(Link)`
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.2rem;
-  justify-self: left;
-`;
+  gap: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-brand-600);
+  text-decoration: none;
 
-const StyledImg = styled.img`
-  display: block;
-  width: 170px;
-  height: 50px;
+  & svg {
+    width: 3.2rem;
+    height: 3.2rem;
+    color: var(--color-brand-600);
+  }
 `;
 
 function Logo() {
-  const { isDarkMode } = useDarkMode();
   return (
-    <LogoLayout>
-      <StyledImg src={!isDarkMode ? darkLogo : lightLogo} alt="logo img" />
-    </LogoLayout>
+    <StyledLogo to="/home">
+      <HiHomeModern />
+      <span>TravelDash</span>
+    </StyledLogo>
   );
 }
 

@@ -1,29 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { tourApi } from "../../services/apiTours";
 
 export function useCreateTour() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (newTour) => {
-      const res = await fetch("http://localhost:3000/tours", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newTour),
-      });
-
-      if (!res.ok) throw new Error("Failed to create tour");
-      return res.json();
-    },
+    mutationFn: tourApi.create,
 
     onSuccess: () => {
-      toast.success("Tour created Successfully!");
-      queryClient.invalidateQueries(["tours"]);
+      toast.success("Tour created successfully!");
+      queryClient.invalidateQueries({ queryKey: ["tours"] });
     },
 
-    onError: (context) => {
-      toast.error("Faild to create tour");
-      queryClient.setQueryData(["tours"], context.previousData);
+    onError: (error) => {
+      toast.error(error.message || "Failed to create tour");
     },
   });
 }

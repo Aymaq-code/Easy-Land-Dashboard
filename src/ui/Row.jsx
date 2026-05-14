@@ -42,6 +42,21 @@ const Row = styled.div`
       }
     `}
 
+
+  ${(props) =>
+    props.resp === "md" &&
+    css`
+      @media screen and (max-width: 768px) {
+        /* flex-direction: column;
+        align-items: start;
+        flex-wrap: wrap;
+        gap: 1rem 0; */
+        flex-direction: column;
+        width: 50%;
+        justify-self: end;
+      }
+    `}
+
   ${(props) =>
     props.resp === "sm" &&
     css`
