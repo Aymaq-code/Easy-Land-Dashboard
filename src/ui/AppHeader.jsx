@@ -1,4 +1,3 @@
-// src/ui/AppHeader.jsx
 import Logo from "./Logo";
 import Row from "./Row";
 import Avatar from "./Avatar";
@@ -9,7 +8,6 @@ import { logoutUser } from "../features/authentication/useAuth";
 import { useGoTo } from "../hooks/useGoTo";
 import { Link } from "react-router";
 import styled from "styled-components";
-import toast from "react-hot-toast";
 
 const AppHeaderLayout = styled.header`
   border-bottom: 1px solid var(--color-grey-200);
@@ -56,7 +54,6 @@ function AppHeader({ toggleSidebar }) {
 
   const handleLogout = () => {
     logoutUser();
-    toast.success("Logged out successfully!");
     gotoLogin();
   };
 
@@ -80,7 +77,7 @@ function AppHeader({ toggleSidebar }) {
           <ButtonIcon onClick={handleLogout} aria-label="Logout" title="Logout">
             <FaSignOutAlt />
           </ButtonIcon>
-          <Link to="/account" aria-label="Account settings">
+          <Link to="/settings" aria-label="Account settings">
             <ButtonIcon as="span" aria-label="Account">
               <FaUser />
             </ButtonIcon>

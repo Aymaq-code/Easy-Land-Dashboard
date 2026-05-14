@@ -1,4 +1,9 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
+
+import { useLogin } from "./useLogin";
+
 import Form from "../../ui/Form";
 import FormGroup from "../../ui/FormGroup";
 import { LoginInput } from "../../ui/Input";
@@ -6,14 +11,10 @@ import Label from "../../ui/Label";
 import Row from "../../ui/Row";
 import Button from "../../ui/Button";
 import SocialMedia from "../../ui/SocialMedia";
-import { useForm } from "react-hook-form";
 import InputErrorMsg from "../../ui/ErrorMsgText";
-import { useState } from "react";
-
-import closeEye from "../../assets/images/eye-slash-svgrepo-com.svg";
-import openEye from "../../assets/images/eye-svgrepo-com (1).svg";
 import FormCheckbox from "../../ui/FormCheckbox";
-import { useLogin } from "./useLogin";
+
+import { Eye, EyeOff } from "lucide-react";
 
 const Container = styled.div`
   display: flex;
@@ -60,12 +61,21 @@ const LoginFooter = styled.div`
   }
 `;
 
-const PassEys = styled.img`
+const PassEys = styled.div`
   height: 28px;
   cursor: pointer;
 
   position: absolute;
   right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
 `;
 
 function LoginForm() {
@@ -121,11 +131,10 @@ function LoginForm() {
               },
             })}
           />
-          <PassEys
-            src={!seePass ? closeEye : openEye}
-            alt="toggle password visibility"
-            onClick={handleSeePass}
-          />
+
+          <PassEys onClick={handleSeePass}>
+            {seePass ? <EyeOff /> : <Eye />}
+          </PassEys>
 
           {errors.userPassword && (
             <InputErrorMsg>{errors.userPassword.message}</InputErrorMsg>

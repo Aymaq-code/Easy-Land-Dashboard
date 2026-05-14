@@ -12,21 +12,51 @@ function DarkModeProvider({ children }) {
 
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.classList.add("dark-mode");
-      document.documentElement.style.setProperty("--color-grey-0", "#1f2937");
-      document.documentElement.style.setProperty("--color-grey-50", "#374151");
-      document.documentElement.style.setProperty("--color-grey-100", "#4b5563");
-      document.documentElement.style.setProperty("--color-grey-200", "#6b7280");
-      document.documentElement.style.setProperty("--color-grey-300", "#9ca3af");
-      document.documentElement.style.setProperty("--color-grey-400", "#d1d5db");
-      document.documentElement.style.setProperty("--color-grey-500", "#e5e7eb");
-      document.documentElement.style.setProperty("--color-grey-600", "#f3f4f6");
-      document.documentElement.style.setProperty("--color-grey-700", "#f9fafb");
-      document.documentElement.style.setProperty("--color-grey-800", "#ffffff");
-      document.documentElement.style.setProperty(
-        "--color-blue-700",
-        "#e6e6e6 ",
-      );
+      if (isDarkMode) {
+        document.documentElement.classList.add("dark-mode");
+
+        document.documentElement.style.setProperty("--color-grey-0", "#1f2937");
+        document.documentElement.style.setProperty(
+          "--color-grey-50",
+          "#374151",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-100",
+          "#4b5563",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-200",
+          "#6b7280",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-300",
+          "#9ca3af",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-400",
+          "#d1d5db",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-500",
+          "#e5e7eb",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-600",
+          "#f3f4f6",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-700",
+          "#f9fafb",
+        );
+        document.documentElement.style.setProperty(
+          "--color-grey-800",
+          "#ffffff",
+        );
+        document.documentElement.style.setProperty(
+          "--color-blue-700",
+          "#e0e0e0",
+        );
+      }
     } else {
       document.documentElement.classList.remove("dark-mode");
       document.documentElement.style.setProperty("--color-grey-0", "#ffffff");
@@ -39,6 +69,7 @@ function DarkModeProvider({ children }) {
       document.documentElement.style.setProperty("--color-grey-600", "#4b5563");
       document.documentElement.style.setProperty("--color-grey-700", "#374151");
       document.documentElement.style.setProperty("--color-grey-800", "#1f2937");
+      document.documentElement.style.setProperty("--color-blue-700", "#1d4ed8");
     }
     localStorage.setItem("darkMode", isDarkMode);
   }, [isDarkMode]);
