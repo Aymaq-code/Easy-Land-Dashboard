@@ -16,12 +16,8 @@ const StyledDashboardLayout = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 507px) {
-    padding: 10px 0;
-  }
-
   @media screen and (max-width: 768px) {
-    padding: 10px 0;
+    padding: 10px 15px;
   }
 `;
 

@@ -27,7 +27,7 @@ const StatusTag = styled.span`
     width: 85%;
   }
   @media screen and (max-width: 250px) {
-    width: 100%;
+    width: 90%;
   }
 
   background-color: ${(props) => {

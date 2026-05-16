@@ -177,8 +177,8 @@ function PageContents({ type, onEditTour }) {
         {type === "bookings" &&
           currentData.map((booking) => (
             <BookingContainer>
-              <DataTitlesRes type={"booking"} />
               <BookingsDataList key={booking.id}>
+                <DataTitlesRes type={"booking"} />
                 <Heading as="h4">{booking.id}</Heading>
 
                 <GuestBox>
