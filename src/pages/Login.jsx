@@ -7,7 +7,7 @@ import LoginForm from "../features/authentication/LoginForm";
 
 const LoginLayout = styled.main`
   height: 100vh;
-  padding: 40px 130px;
+  padding: 0 130px;
   align-content: center;
 
   @media screen and (max-width: 1200px) {
@@ -20,8 +20,7 @@ const LoginLayout = styled.main`
 `;
 
 const LoginContent = styled.div`
-  height: 100%;
-
+  height: 90%;
   border-radius: 50px;
   box-shadow: var(--shadow-md);
 
